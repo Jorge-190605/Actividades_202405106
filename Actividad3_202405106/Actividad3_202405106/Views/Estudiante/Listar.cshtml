@@ -1,0 +1,55 @@
+﻿@model List<Actividad3_202405106.Models.Estudiante>
+
+<h2>Listado de Estudiantes</h2>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Carné</th>
+            <th>Nombre</th>
+            <th>Promedio</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var estudiante in Model)
+        {
+            <tr>
+                <td>@estudiante.Carne</td>
+                <td>@estudiante.Nombre</td>
+                <td>@estudiante.Promedio</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<p>
+    <a asp-controller="Estudiante" asp-action="Listar">Actualizar lista</a>
+</p>
+
+<hr />
+<h3>Registrar nuevo estudiante</h3>
+
+@if (TempData["Success"] != null)
+{
+    <div class="alert alert-success">@TempData["Success"]</div>
+}
+@if (TempData["Error"] != null)
+{
+    <div class="alert alert-danger">@TempData["Error"]</div>
+}
+
+<form asp-controller="Estudiante" asp-action="Registrar" method="post">
+    <div class="mb-2">
+        <label>Carné:</label>
+        <input type="number" name="Carne" required class="form-control" />
+    </div>
+    <div class="mb-2">
+        <label>Nombre:</label>
+        <input type="text" name="Nombre" required class="form-control" />
+    </div>
+    <div class="mb-2">
+        <label>Promedio:</label>
+        <input type="number" step="0.1" name="Promedio" required class="form-control" />
+    </div>
+    <button type="submit" class="btn btn-success">Registrar</button>
+</form>
